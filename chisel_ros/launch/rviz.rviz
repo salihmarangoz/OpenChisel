@@ -96,66 +96,10 @@ Visualization Manager:
       Use rainbow: true
       Value: true
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        arm_base:
-          Value: true
-        arm_base_link:
-          Value: true
-        arm_ee_link:
-          Value: true
-        arm_forearm_link:
-          Value: true
-        arm_shoulder_link:
-          Value: true
-        arm_tool0:
-          Value: true
-        arm_tool0_controller:
-          Value: true
-        arm_upper_arm_link:
-          Value: true
-        arm_wrist_1_link:
-          Value: true
-        arm_wrist_2_link:
-          Value: true
-        arm_wrist_3_link:
-          Value: true
-        base_link:
-          Value: true
-        cam0:
-          Value: true
-        cam1:
-          Value: true
-        cam2:
-          Value: true
-        cam3:
-          Value: true
-        camera_aligned_depth_to_color_frame:
-          Value: true
-        camera_bottom_screw_frame:
-          Value: true
-        camera_color_frame:
-          Value: true
-        camera_color_optical_frame:
-          Value: true
-        camera_depth_frame:
-          Value: true
-        camera_depth_optical_frame:
-          Value: true
-        camera_link:
-          Value: true
-        map:
-          Value: true
-        odom:
-          Value: true
-        platform_base:
-          Value: true
-        tracker:
-          Value: true
-        world:
-          Value: true
       Marker Alpha: 1
       Marker Scale: 1
       Name: TF
@@ -163,46 +107,9 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        world:
-          map:
-            odom:
-              base_link:
-                cam0:
-                  {}
-                cam1:
-                  {}
-                cam2:
-                  {}
-                cam3:
-                  {}
-                platform_base:
-                  arm_base_link:
-                    arm_base:
-                      arm_tool0_controller:
-                        {}
-                    arm_shoulder_link:
-                      arm_upper_arm_link:
-                        arm_forearm_link:
-                          arm_wrist_1_link:
-                            arm_wrist_2_link:
-                              arm_wrist_3_link:
-                                arm_ee_link:
-                                  {}
-                                arm_tool0:
-                                  camera_bottom_screw_frame:
-                                    camera_link:
-                                      camera_aligned_depth_to_color_frame:
-                                        camera_color_optical_frame:
-                                          {}
-                                      camera_color_frame:
-                                        {}
-                                      camera_depth_frame:
-                                        camera_depth_optical_frame:
-                                          {}
-                tracker:
-                  {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
     - Alpha: 0.20000000298023224
       Auto Size:
         Auto Size Factor: 1
@@ -251,14 +158,6 @@ Visualization Manager:
       Transport Hint: raw
       Unreliable: false
       Value: true
-    - Class: rviz/Marker
-      Enabled: false
-      Marker Topic: /Chisel/chunk_boxes
-      Name: Marker
-      Namespaces:
-        {}
-      Queue Size: 100
-      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -287,7 +186,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.9218180179595947
+      Distance: 0.9292473196983337
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -295,17 +194,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 1.2468055486679077
-        Y: 1.4466558694839478
-        Z: 1.5235822200775146
+        X: 0.8965200185775757
+        Y: 1.2399694919586182
+        Z: 1.4785358905792236
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.44039881229400635
+      Pitch: 0.5003988742828369
       Target Frame: <Fixed Frame>
-      Yaw: 4.435410499572754
+      Yaw: 3.7154033184051514
     Saved: ~
 Window Geometry:
   Displays:
