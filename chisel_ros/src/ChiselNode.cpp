@@ -21,9 +21,16 @@
 #include <ros/ros.h>
 #include <ros/node_handle.h>
 #include <chisel_ros/ChiselServer.h>
+#include <csignal>
+
+void signal_handler(int signal)
+{
+  ROS_INFO("Ignoring SIGTERM...");
+}
 
 int main(int argc, char** argv)
 {
+    std::signal(SIGTERM, signal_handler);
     ROS_INFO("Starting up chisel node.");
     ros::init(argc, argv, "Chisel");
     ros::NodeHandle nh("~");
