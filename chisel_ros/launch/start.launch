@@ -7,31 +7,32 @@
         <param name="chunk_size_x" value="32"/>
         <param name="chunk_size_y" value="32"/>
         <param name="chunk_size_z" value="32"/>
-        <param name="truncation_scale" value="10.0"/>
-        <param name="integration_weight" value="1"/>
+        <param name="truncation_scale" value="3.0"/>
+        <param name="integration_weight" value="0.5"/>
         <param name="use_voxel_carving" value="true"/>
-        
         <param name="carving_dist_m" value="0.01"/>
-        <param name="voxel_resolution_m" value="0.003"/>
+        <param name="voxel_resolution_m" value="0.004"/>
         <param name="far_plane_dist" value="1.5"/>
         <param name="base_transform" value="world"/>
 
         <param name="save_file_on_exit" value="true"/>
         <param name="file_path" value="$(find chisel_ros)/../output/chisel.ply"/>
 
-        <!--
+        
         <param name="fusion_mode" value="DepthImage"/>
         <param name="use_color" value="true"/>
         <remap from="/depth_image" to="/camera/aligned_depth_to_color/image_raw"/>
         <remap from="/depth_camera_info" to="/camera/aligned_depth_to_color/camera_info"/>
         <remap from="/color_image" to="/camera/color/image_raw"/>
         <remap from="/color_camera_info" to="/camera/color/camera_info"/>
-        -->
+        
 
+        <!--
         <param name="fusion_mode" value="DepthImage"/>
         <param name="use_color" value="false"/>
         <remap from="/depth_image" to="/camera/aligned_depth_to_color/image_raw"/>
         <remap from="/depth_camera_info" to="/camera/aligned_depth_to_color/camera_info"/>
+        -->
         
         <!--
         <param name="fusion_mode" value="PointCloud"/>
