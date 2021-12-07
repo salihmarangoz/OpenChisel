@@ -57,7 +57,7 @@ namespace chisel_ros
     void ChiselServer::PublishMeshes()
     {
         visualization_msgs::Marker marker;
-        FillMarkerTopicWithMeshes(&marker);
+        FillMarkerTopicWithMeshes(&marker, is_bgr);
 
         if(!marker.points.empty())
             meshPublisher.publish(marker);
@@ -201,10 +201,10 @@ namespace chisel_ros
         return true;
     }
 
-    void ChiselServer::SubscribeDepthImage(const std::string& imageTopic, const std::string& infoTopic, const std::string& transform)
+    void ChiselServer::SubscribeDepthImage(const std::string& imageTopic, const std::string& infoTopic/*, const std::string& transform*/)
     {
         depthCamera.imageTopic = imageTopic;
-        depthCamera.transform = transform;
+        //depthCamera.transform = transform;
         depthCamera.infoTopic = infoTopic;
         depthCamera.imageSubscriber = nh.subscribe(depthCamera.imageTopic, 20, &ChiselServer::DepthImageCallback, this);
         depthCamera.infoSubscriber = nh.subscribe(depthCamera.infoTopic, 20, &ChiselServer::DepthCameraInfoCallback, this);
@@ -264,6 +264,7 @@ namespace chisel_ros
         int tries = 0;
         int maxTries = 10;
 
+        depthCamera.transform = depthImage->header.frame_id;
         while(!gotTransform && tries < maxTries)
         {
             tries++;
@@ -302,10 +303,10 @@ namespace chisel_ros
         depthCamera.gotInfo = true;
     }
 
-    void ChiselServer::SubscribeColorImage(const std::string& imageTopic, const std::string& infoTopic, const std::string& transform)
+    void ChiselServer::SubscribeColorImage(const std::string& imageTopic, const std::string& infoTopic/*, const std::string& transform*/)
     {
         colorCamera.imageTopic = imageTopic;
-        colorCamera.transform = transform;
+        //colorCamera.transform = transform;
         colorCamera.infoTopic = infoTopic;
         colorCamera.imageSubscriber = nh.subscribe(colorCamera.imageTopic, 20, &ChiselServer::ColorImageCallback, this);
         colorCamera.infoSubscriber = nh.subscribe(colorCamera.infoTopic, 20, &ChiselServer::ColorCameraInfoCallback, this);
@@ -319,6 +320,8 @@ namespace chisel_ros
 
     void ChiselServer::ColorImageCallback(sensor_msgs::ImageConstPtr colorImage)
     {
+        is_bgr = colorImage->encoding == "bgr8";
+        
         if (IsPaused()) return;
         SetColorImage(colorImage);
 
@@ -328,6 +331,7 @@ namespace chisel_ros
         int tries = 0;
         int maxTries = 10;
 
+        colorCamera.transform = colorImage->header.frame_id;
         while(!gotTransform && tries < maxTries)
         {
             tries++;
@@ -534,7 +538,7 @@ namespace chisel_ros
         return fmax(n.dot(light), 0.0f) * chisel::Vec3(0.5, 0.5, 0.5);
     }
 
-    void ChiselServer::FillMarkerTopicWithMeshes(visualization_msgs::Marker* marker)
+    void ChiselServer::FillMarkerTopicWithMeshes(visualization_msgs::Marker* marker, bool is_bgr)
     {
         assert(marker != nullptr);
         marker->header.stamp = ros::Time::now();
@@ -576,9 +580,18 @@ namespace chisel_ros
                 {
                     const chisel::Vec3& meshCol = mesh->colors[i];
                     std_msgs::ColorRGBA color;
-                    color.r = meshCol[0];
                     color.g = meshCol[1];
-                    color.b = meshCol[2];
+                    if (is_bgr)
+                    {
+                        color.r = meshCol[0];
+                        color.b = meshCol[2];
+                    }
+                    else
+                    {
+                        color.r = meshCol[2];
+                        color.b = meshCol[0];
+                    }
+
                     color.a = 1.0;
                     marker->colors.push_back(color);
                 }

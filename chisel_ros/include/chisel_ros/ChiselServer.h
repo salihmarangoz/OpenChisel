@@ -110,11 +110,11 @@ namespace chisel_ros
             void PublishDepthFrustum();
             void PublishColorFrustum();
 
-            void SubscribeDepthImage(const std::string& depthImageTopic, const std::string& cameraInfoTopic, const std::string& transform);
+            void SubscribeDepthImage(const std::string& depthImageTopic, const std::string& cameraInfoTopic/*, const std::string& transform*/);
             void DepthCameraInfoCallback(sensor_msgs::CameraInfoConstPtr cameraInfo);
             void DepthImageCallback(sensor_msgs::ImageConstPtr depthImage);
 
-            void SubscribeColorImage(const std::string& colorImageTopic, const std::string& cameraInfoTopic, const std::string& transform);
+            void SubscribeColorImage(const std::string& colorImageTopic, const std::string& cameraInfoTopic/*, const std::string& transform*/);
             void ColorCameraInfoCallback(sensor_msgs::CameraInfoConstPtr cameraInfo);
             void ColorImageCallback(sensor_msgs::ImageConstPtr colorImage);
 
@@ -123,7 +123,7 @@ namespace chisel_ros
 
             void IntegrateLastDepthImage();
             void IntegrateLastPointCloud();
-            void FillMarkerTopicWithMeshes(visualization_msgs::Marker* marker);
+            void FillMarkerTopicWithMeshes(visualization_msgs::Marker* marker, bool is_bgr);
             inline void SetBaseTransform(const std::string& frameName) { baseTransform = frameName; }
 
             inline bool HasNewData() { return hasNewData; }
@@ -181,6 +181,7 @@ namespace chisel_ros
             float nearPlaneDist;
             float farPlaneDist;
             bool isPaused;
+            bool is_bgr;
             FusionMode mode;
     };
     typedef std::shared_ptr<ChiselServer> ChiselServerPtr;

@@ -72,10 +72,10 @@ int main(int argc, char** argv)
     nh.param("depth_image_topic", depthImageTopic, std::string("/depth_image"));
     nh.param("point_cloud_topic", pointCloudTopic, std::string("/camera/depth_registered/points"));
     nh.param("depth_image_info_topic", depthImageInfoTopic, std::string("/depth_camera_info"));
-    nh.param("depth_image_transform", depthImageTransform, std::string("/camera_depth_optical_frame"));
+    //nh.param("depth_image_transform", depthImageTransform, std::string("/camera_depth_optical_frame"));
     nh.param("color_image_topic", colorImageTopic, std::string("/color_image"));
     nh.param("color_image_info_topic", colorImageInfoTopic, std::string("/color_camera_info"));
-    nh.param("color_image_transform", colorImageTransform, std::string("/camera_rgb_optical_frame"));
+    //nh.param("color_image_transform", colorImageTransform, std::string("/camera_rgb_optical_frame"));
     nh.param("base_transform", baseTransform, std::string("/camera_link"));
     nh.param("mesh_topic", meshTopic, std::string("full_mesh"));
     nh.param("chunk_box_topic", chunkBoxTopic, std::string("chunk_boxes"));
@@ -106,7 +106,7 @@ int main(int argc, char** argv)
 
     if (mode == chisel_ros::ChiselServer::FusionMode::DepthImage)
     {
-        server->SubscribeDepthImage(depthImageTopic, depthImageInfoTopic, depthImageTransform);
+        server->SubscribeDepthImage(depthImageTopic, depthImageInfoTopic/*, depthImageTransform*/);
     }
     else
     {
@@ -122,7 +122,7 @@ int main(int argc, char** argv)
 
     if (useColor && mode == chisel_ros::ChiselServer::FusionMode::DepthImage)
     {
-        server->SubscribeColorImage(colorImageTopic, colorImageInfoTopic, colorImageTransform);
+        server->SubscribeColorImage(colorImageTopic, colorImageInfoTopic/*, colorImageTransform*/);
         server->SetupColorPosePublisher("last_color_pose");
         server->SetupColorFrustumPublisher("last_color_frustum");
     }
