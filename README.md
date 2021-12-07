@@ -1,3 +1,9 @@
+**!!!!!!!!!!!!!!!!!!**
+
+**Also see the successor: https://github.com/ethz-asl/voxblox**
+
+**!!!!!!!!!!!!!!!!!!**
+
 OpenChisel
 ==========
 
